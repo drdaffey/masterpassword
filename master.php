@@ -93,5 +93,4 @@ Enter length:
 <input type="text" class="ui input" name="length" value="19"/><br><br>
 <input type="submit" class="ui primary button" value="Make me some creds!"/><br>
 <form><br>
-MPW v3.2 For old algo, use <a href="https://8218.ga/old">this</a>. Please note that you should definitely change passwords to new algo.<br>
-Old algo will be decommissioned in December of 2016.
+MPW v3.2
