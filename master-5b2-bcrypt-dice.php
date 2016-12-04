@@ -25,12 +25,13 @@ $a_ani_2 = array("alpaca","bear","bird","camel","cat","cheetah","chicken","chimp
 $a_names_1 = array("ash","brook","corey","dannie","evan","francis","glenn","harper","izzy","jude","kerry","logan","madison","noel","olly","pat","riley","shay","tailor","vic","wesley");
 $a_names_2 = array("amney","burke","cull","dodds","ellis","fabian","gledhill","herman","lawson","marsh","nowak","orowski","price","quale","redfern","tuowy","usher","void","whitaker","xano","yates","zayne");
 
-$key = crypt($_POST['site'].$_POST['mastpass'],'$2a$16$'.md5($_POST['gen']));
+$number = preg_match_all('/[0-9]/',hash('sha512',$_POST['mastpass']),$matches);
+$key = crypt($_POST['site'].$_POST['mastpass'],'$2a$13$'.md5($number.$_POST['gen']));
 $length = $_POST['length']-1;
 $final = preg_replace('/[^[:alnum:]]/','-',substr($key,"-".$length));
 
 echo '<body style="font-family: courier;">';
-$number = preg_match_all('/[0-9]/',$key,$matches);
+
 $_nice = str_split(preg_replace('/[^0-9]+/', '', hash('sha512',htmlspecialchars($_POST['site']) . $number)));
 $_nice_first = $_nice[0].$_nice[1];
 $_nice_second = $_nice[2].$_nice[3];
@@ -85,4 +86,4 @@ Enter length:
 </select><br><br>
 <input type="submit" class="ui primary button" value="Make me some creds!"/><br>
 <form><br>
-MPW v5b2
+MPW v5b31
