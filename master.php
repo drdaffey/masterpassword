@@ -33,9 +33,9 @@ $final = preg_replace('/[^[:alnum:]]/','-',substr($key,"-".$length));
 echo '<body style="font-family: courier;">';
 
 $_nice = str_split($number);
-$_nice_first = $_nice[0].$_nice[1];
-$_nice_second = $_nice[2].$_nice[3];
-$_nice_third = $_nice[4].$_nice[5].$_nice[6];
+-$_nice_first = $_nice[2].$_nice[3];
+ -$_nice_second = $_nice[4].$_nice[5];
+ -$_nice_third = $_nice[6].$_nice[7].$_nice[8];
 
 $_nice_selector = preg_replace('/[^0-9]+/', '', $_POST['dict']);
 
@@ -46,9 +46,9 @@ switch($_nice_selector){
 }
 
 // Don't wanna get an empty piece of the username.
-if ($_nice_first > count($_words1)) $_nice_first = $_nice[0];
+if ($_nice_first > count($_words1)) $_nice_first = $_nice[3];
 if ($_nice_first-1 < 0) $_nice_first = 1;
-if ($_nice_second > count($_words2)) $_nice_second = $_nice[2];
+if ($_nice_second > count($_words2)) $_nice_second = $_nice[5];
 if ($_nice_second-1 < 0) $_nice_second = 1;
 
 echo $_POST['gen'],' was used for the generation of ',$_POST['site'],'.';
