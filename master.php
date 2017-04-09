@@ -1,4 +1,5 @@
 <style>
+*{font-family: courier;}
 *:focus {outline-color: #fac847;}
 .ui.button {
 border-color: #3D444C #2F353B #2C3137;
@@ -17,6 +18,8 @@ border-color: #C59F43 #AA8326 #957321 !important;
 color: #111111 !important;
 background-color: #fac847;}
 .ui.input:focus {background: rgba(0,0,0,.05);}
+input.hide {text-shadow: 0 0 12px black; color: rgba(0,0,0,0); border:none;}
+input.hide:focus{text-shadow: none; color: black; outline-color:rgba(0,0,0,0);}
 </style>
 <?php
 if (isset($_POST['site'], $_POST['mastpass']) && $_POST['mastpass']!=NULL && $_POST['length'] > 7 && $_POST['length'] < 20){
@@ -29,8 +32,6 @@ $number = preg_replace('/[^0-9]+/', '',hexdec(hash('sha512',$_POST['mastpass'] .
 $key = crypt($_POST['site'].$_POST['mastpass'],'$2a$13$'.md5($number.$_POST['gen']));
 $length = $_POST['length']-1;
 $final = preg_replace('/[^[:alnum:]]/','-',substr($key,"-".$length));
-
-echo '<body style="font-family: courier;">';
 
 $_nice = str_split($number);
 $_nice_first = $_nice[1].$_nice[2];
@@ -53,13 +54,7 @@ if ($_nice_second-1 < 0) $_nice_second = 1;
 
 echo $_POST['gen'],' was used for the generation of ',$_POST['site'],'.';
 echo "<br>Username: " . $_words1[$_nice_first-1] . $_words2[$_nice_second-1] . $_nice_third . "<br>Password (" . (strlen($final)+1) . " characters): ";?>
-<button class="ui primary button trig" id="button" style="display:none;" data-clipboard-text="<?php echo '-',$final; ?>">To clipboard</button>
-<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/v1.5.12/dist/clipboard.min.js"></script>
-<script>
-var clipboard = new Clipboard('.trig');
-document.getElementById("button").style.display = "inline";
-</script>
-<?php die("-".$final);}?>
+<input type="text" class="hide" value="<?php die("-".$final.'" />');}?>
 
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 <select name="dict" class="ui primary button" >
@@ -78,12 +73,12 @@ echo '<option value="',$a_gen[$rand],'">',$a_gen[$rand],'</option>','<option dis
 foreach($a_gen as $gen) echo '<option value="',$gen,'">',$gen,'</option>'; ?>
 </select><br><br>
 Random generation string out of <?php echo count($a_gen);?> available. Memorize it if this is your first time using this or select the same string from the dropdown.<br><br>
-<input type="submit" class="ui primary button" value="Make me some creds!"/><br><br>
 Enter length:
 <select name="length" class="ui primary button">
 <option value="8">8</option>
 <option value="10">10</option>
 <option value="19" selected>19</option>
-</select><br>
+</select><br><br>
+<input type="submit" class="ui primary button" value="Make me some creds!"/><br>
 <form><br>
-MPW v7
+MPW v7.1
