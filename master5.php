@@ -29,10 +29,10 @@ $a_names_1 = array("ash","brook","corey","dannie","evan","francis","glenn","harp
 $a_names_2 = array("amney","burke","cull","dodds","ellis","fabian","gledhill","herman","lawson","marsh","nowak","orowski","price","quale","redfern","tuowy","usher","void","whitaker","xano","yates","zayne");
 
 
-$salt = $_POST['gen'];
+$seed = $_POST['gen'];
 $site = $_POST['site'];
 $secret = base64_encode($_POST['mastpass']);
-$data = $salt.$site;
+$data = $seed.$site;
 $length = $_POST['length'];
 $number=1;
 do{
@@ -43,7 +43,7 @@ $number++;
 
 $final = preg_replace('/[^[:alnum:]]/','-',substr($c,'-'.$length));
 
-$_nice = str_split(crc32($number.$secret.$salt));
+$_nice = str_split(crc32(hash('sha512',$site.$secret)));
 $_nice_first = $_nice[0].$_nice[1];
 $_nice_second = $_nice[2].$_nice[3];
 $_nice_third = $_nice[4].$_nice[5].$_nice[6];
